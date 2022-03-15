@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Task4 :- Delete Task</title>
+        <script>
+
+         function deleteTask(){
+            this.task = ["Playing","Eating","Cooking","Studying","Sleeping"];
+            document.write(this.task);
+            document.write("<br/>");
+
+            this.delete = function(num){
+                this.task.splice(num-1,1);
+                document.write("<br/>");
+                document.write("List of task After deletion :- ",this.task);
+
+            }
+
+         }     
+         
+         var obj=new deleteTask();
+         obj.delete(2);
+
+        
+
+        </script>
+    </head>
+</html>

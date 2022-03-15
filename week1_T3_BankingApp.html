@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Task3 :- Banking App having 3 functions(openAcc , withdraw , deposit)</title>
+        <script>
+
+            document.write("Banking App");
+            document.write("<br />")
+            document.write("<br />")
+
+            function bankingApp(){
+            this.balance=0
+            this.openAcc = function(openBal){
+                this.balance=openBal;
+                document.write("Account opened and opening balance is : "+this.balance);
+            }
+            this.withdraw = function(wAmt){
+                if(wAmt > this.balance){
+                    document.write("Not Sufficient balance plz give Lower ammount");
+                }
+                else{
+                    this.balance = this.balance - wAmt;
+                    document.write("Your updated balance after withdraw is : " + this.balance);
+                }
+            }
+            this.deposit = function(dAmt){
+                this.balance = this.balance + dAmt;
+                document.write("Your updated balance after deposite is : " + this.balance);
+            }
+        }
+
+        var user1 = new bankingApp();
+        user1.openAcc(5000);
+        document.write("<br/>");
+        document.write("<br/>");
+        user1.withdraw(6000);
+        document.write("<br/>");
+        document.write("<br/>");
+        user1.withdraw(2000);
+        document.write("<br/>");
+        document.write("<br/>");
+        user1.deposit(5000);
+        document.write("<br/>");
+        document.write("<br/>");
+
+
+        </script>
+    </head>
+</html>
