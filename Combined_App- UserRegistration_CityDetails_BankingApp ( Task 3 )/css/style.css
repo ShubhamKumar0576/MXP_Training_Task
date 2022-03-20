@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.navbar{
+        font-family: 'Lato', sans-serif;
+        color:grey;
+        font-size: 25px;
+        margin: 0px;
+        padding: 0 !important;
+        background-image: linear-gradient(to right,#a517ba,#5f1782);
+      }
+.navbar-nav > li{
+        padding-left:5px;
+        padding-right:10px;
+      }
+
+#nav-bar{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar-brand img{
+    height: 40px;
+    padding-left: 15px;
+}
+#navbarNav{
+    padding-right: 30vh;
+}
+.navbar-nav li{
+    padding: 0 10px;
+}
+.navbar-nav li a{
+    color: aliceblue !important;
+    font-weight: 550;
+}
+
+.navbar-nav :hover{
+background-color: #5f1782;
+}
+

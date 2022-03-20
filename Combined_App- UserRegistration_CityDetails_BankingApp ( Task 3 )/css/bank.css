@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#heading{
+    margin-right:70vh;
+    padding: 10vh;
+    color:rgb(0, 233, 241);
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.background_image{
+    background-image: url("../img/a.jpg");
+    height: 92.8vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+#box{
+    margin-top: 0vh;
+    margin-right: 70vh;
+
+   }
+body{
+           
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.card-body{
+    background-color: aqua;
+    
+}

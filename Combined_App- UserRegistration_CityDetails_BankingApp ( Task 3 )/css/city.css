@@ -1,0 +1,29 @@
+.card-text{
+   font-family:'allura';
+   font-size :23px;
+   
+}
+.card-title{
+    font-family:'open-sans';
+    font-size: 30px;
+    text-align: center;
+    margin-right: 30px;
+    
+}
+.card-img-top{
+    float: left;
+    width:  100px;
+    height: 350px;
+    background-size: cover;
+}
+.card-body{
+    background-color: azure;
+    
+}
+div {
+    column-gap: 10px;
+  }
+
+.card-group{
+    margin-top: 20px;
+}
