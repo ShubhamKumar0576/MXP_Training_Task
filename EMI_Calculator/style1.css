@@ -1,0 +1,41 @@
+ .container{
+     width: 700px;
+     height: 7vh;
+     padding: 0;
+ }
+.section1{
+
+    margin-left: 800px;
+    width: 120vh;
+  
+   
+    
+}
+.section{
+    margin-right: 70vh;
+    width: 100vh;
+   
+}
+.button{
+    padding: 20px;
+}
+ .btn{
+     margin-left: 25px;
+    padding: 5px;
+    position: relative;
+    float: left;
+    background-color: #fff;
+    /* margin-top: 10px; */
+    
+   }
+.content{
+    font-size: 18px;
+    margin-left: 20vh ;
+}  
+
+body {
+	color: #fff;
+	
+	font-family: 'Roboto', sans-serif;
+}
+

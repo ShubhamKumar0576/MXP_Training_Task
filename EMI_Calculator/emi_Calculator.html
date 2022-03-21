@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loan Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    
+    <link rel="stylesheet" href="style1.css">
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+      
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="content">
+          <h1>EMI Calculator</h1>
+   
+        </div>
+
+        <div class="columns">
+          <div class="column is-three-quarters">
+            <div class="card">
+              <div class="card-content">
+                <form id="loan-form">
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">1</p>
+                        Loan Amount
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-left ">
+                            <input class="input" id="amount" type="number" />
+                            <span class="icon is-small is-left">
+                              <i class="fa fa-rupee-sign"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">2</p>
+                        Interest Rate
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-right">
+                            <input class="input" id="interest" type="number" />
+                            <span class="icon is-small is-right">
+                              <i class="fa fa-percentage"></i>
+                              
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">3</p>
+                        Number Of Years
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-left">
+                            <input class="input" id="years" type="number" />
+                            <span class="icon is-small is-left">
+                              <i class="fa fa-calendar"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="btn">
+                    <button
+                      class="button is-medium  is-primary is-outlined" onclick="TotalAmount()" 
+                    >
+                      Calculate
+                    </button>
+                  </div>
+                  <div class="btn">
+                    <button type="button" class="button is-medium  is-primary is-outlined" onclick="YearAmount()">
+                      Yearly
+                    </button>
+                  </div>
+                  <div class="btn">
+                    <button type="button" class="button is-medium  is-primary is-outlined" onclick="MonthlyAmount()">
+                      Monthly
+                    </button>
+                </div>
+                <div id="ResultHere" style="padding: 20px"></div>
+              </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+   
+    <!-- RESULTS -->
+    <section class="section1"> 
+        <h1 class="title ">Calculated Results</h1>
+  <div class="columns is-multiline">
+    
+    <div class="column is-12-tablet is-6-desktop is-3-widescreen">
+      <div class="notification is-primary has-text">
+        <p id="monthlyPayment" class="title is-4">$</p>
+        <p class="subtitle is-4">Monthly Payments</p>
+      </div>
+    </div>
+  
+      <div class="column is-12-tablet is-6-desktop is-3-widescreen">
+          <div class="notification is-info has-text">
+            <p id="totalInterest" class="title is-4">%</p>
+            <p class="subtitle is-4">Total Interest</p>
+          </div>
+        </div>
+  
+        <div class="column is-12-tablet is-6-desktop is-3-widescreen">
+          <div class="notification is-link has-text">
+            <p id="totalPayment" class="title is-4">$</p>
+            <p class="subtitle is-4">Total Amount</p>
+          </div>
+        </div>
+  
+  </div>
+  </section>
+  
+<script>
+    function input_Validation(loanAmount, interestRate, tenure) {
+      if (loanAmount === "" || interestRate === "" || tenure === "") {
+        alert("Please enter valid inputs.");
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function TotalAmount() {
+
+
+
+        var loanAmount = document.getElementById("amount").value;
+        var interestRate = document.getElementById("interest").value;
+        var tenure = document.getElementById("years").value;
+
+        if (input_Validation(loanAmount, interestRate, tenure)) {
+          loanAmount = parseInt(loanAmount);
+          interestRate = parseInt(interestRate);
+          tenure = parseInt(tenure);
+
+          var CI = CompoundInterest(
+            loanAmount,
+            interestRate,
+            tenure
+          ).toFixed(2);
+
+          var tag = document.createElement("p");
+          var text = document.createTextNode(
+            `Total Amount is : ${CI}`
+          );
+
+          tag.appendChild(text);
+
+          const value = document.getElementById("ResultHere");
+          if (value.firstElementChild != null) {
+            value.removeChild(value.firstElementChild);
+          }
+
+          console.log(CI);
+
+          document.getElementById("ResultHere").appendChild(tag);
+        }
+      }
+
+    function YearAmount() {
+      var loanAmount = document.getElementById("amount").value;
+      var interestRate = document.getElementById("interest").value;
+      var tenure = document.getElementById("years").value;
+
+      if (input_Validation(loanAmount, interestRate, tenure)) {
+        loanAmount = parseInt(loanAmount);
+        interestRate = parseInt(interestRate);
+        tenure = parseInt(tenure);
+
+        var CI = CompoundInterest(
+          loanAmount,
+          interestRate,
+          tenure
+        ).toFixed(2);
+
+        const value = document.getElementById("ResultHere");
+        if (value.firstElementChild != null) {
+          value.removeChild(value.firstElementChild);
+        }
+
+        let table = document.createElement("table");
+        table.classList.add("table");
+        table.classList.add("table-light");
+        let thead = document.createElement("thead");
+        let tbody = document.createElement("tbody");
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        // Adding the entire table to the body tag
+        document.getElementById("ResultHere").appendChild(table);
+
+        let row_1 = document.createElement("tr");
+        let heading_1 = document.createElement("th");
+        heading_1.innerHTML = "Sr. No.";
+        let heading_2 = document.createElement("th");
+        heading_2.innerHTML = "Yearly Payment";
+        let heading_3 = document.createElement("th");
+        heading_3.innerHTML = "Interest Occured";
+        let heading_4 = document.createElement("th");
+        heading_4.innerHTML = "Paid amount";
+        let heading_5 = document.createElement("th");
+        heading_5.innerHTML = "Remaining amount";
+
+        row_1.appendChild(heading_1);
+        row_1.appendChild(heading_2);
+        row_1.appendChild(heading_3);
+        row_1.appendChild(heading_4);
+        row_1.appendChild(heading_5);
+        thead.appendChild(row_1);
+
+             for (var i = 0; i < tenure; i++) {
+          let row_2 = document.createElement("tr");
+          let row_2_data_1 = document.createElement("td");
+          row_2_data_1.innerHTML = i + 1;
+          let row_2_data_2 = document.createElement("td");
+          row_2_data_2.innerHTML = (CI / tenure).toFixed(2);
+          let row_2_data_3 = document.createElement("td");
+          row_2_data_3.innerHTML = (
+            CI / tenure -
+            loanAmount / tenure
+          ).toFixed(2);
+          let row_2_data_4 = document.createElement("td");
+          row_2_data_4.innerHTML = (CI * i / tenure).toFixed(2);
+          let row_2_data_5 = document.createElement("td");
+          row_2_data_5.innerHTML = CI -(CI * i / tenure).toFixed(2);
+
+          row_2.appendChild(row_2_data_1);
+          row_2.appendChild(row_2_data_2);
+          row_2.appendChild(row_2_data_3);
+          row_2.appendChild(row_2_data_4);
+          row_2.appendChild(row_2_data_5);
+          tbody.appendChild(row_2);
+        }
+      }
+    }
+
+    function MonthlyAmount() {
+      var loanAmount = document.getElementById("amount").value;
+      var interestRate = document.getElementById("interest").value;
+      var tenure = document.getElementById("years").value;
+
+      if (input_Validation(loanAmount, interestRate, tenure)) {
+        loanAmount = parseInt(loanAmount);
+        interestRate = parseInt(interestRate);
+        tenure = parseInt(tenure);
+
+        var CI = CompoundInterest(
+          loanAmount,
+          interestRate,
+          tenure
+        ).toFixed(2);
+
+        const value = document.getElementById("ResultHere");
+        if (value.firstElementChild != null) {
+          value.removeChild(value.firstElementChild);
+        }
+
+        let table = document.createElement("table");
+        table.classList.add("table");
+        table.classList.add("table-light");
+        let thead = document.createElement("thead");
+        let tbody = document.createElement("tbody");
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        // Adding the entire table to the body tag
+        document.getElementById("ResultHere").appendChild(table);
+
+        let row_1 = document.createElement("tr");
+        let heading_1 = document.createElement("th");
+        heading_1.innerHTML = "Sr. No.";
+        let heading_2 = document.createElement("th");
+        heading_2.innerHTML = "Monthly Payment";
+        let heading_3 = document.createElement("th");
+        heading_3.innerHTML = "Interest Occured";
+        let heading_4 = document.createElement("th");
+        heading_4.innerHTML = "Paid amount";
+        let heading_5 = document.createElement("th");
+        heading_5.innerHTML = "Remaining amount";
+
+        row_1.appendChild(heading_1);
+        row_1.appendChild(heading_2);
+        row_1.appendChild(heading_3);
+        row_1.appendChild(heading_4);
+        row_1.appendChild(heading_5);
+        
+        
+        thead.appendChild(row_1);
+
+        for (var i = 0; i < tenure * 12; i++) {
+          let row_2 = document.createElement("tr");
+          let row_2_data_1 = document.createElement("td");
+          row_2_data_1.innerHTML = i + 1;
+          let row_2_data_2 = document.createElement("td");
+          row_2_data_2.innerHTML = ((CI/12) / tenure).toFixed(2);
+          let row_2_data_3 = document.createElement("td");
+          row_2_data_3.innerHTML = (
+            CI / (tenure * 12) -
+            loanAmount / (tenure * 12)
+          ).toFixed(2);
+          let row_2_data_4 = document.createElement("td");
+          row_2_data_4.innerHTML = ((CI/12) * i / tenure).toFixed(2);
+          let row_2_data_5 = document.createElement("td");
+          row_2_data_5.innerHTML = CI -((CI/12) * i / tenure).toFixed(2);
+
+          row_2.appendChild(row_2_data_1);
+          row_2.appendChild(row_2_data_2);
+          row_2.appendChild(row_2_data_3);
+          row_2.appendChild(row_2_data_4);
+          row_2.appendChild(row_2_data_5);
+          tbody.appendChild(row_2);
+        }
+      }
+    }
+
+    function CompoundInterest(loanAmount, interestRate, tenure) {
+      const rate = interestRate / 100;
+      let val = Math.pow(1 + rate / 12, tenure * 12);
+      return loanAmount * val;
+    }
+
+    function generateTable(table, data) {
+      for (let element of data) {
+        let row = table.insertRow();
+        for (key in element) {
+          let cell = row.insertCell();
+          let text = document.createTextNode(element[key]);
+          cell.appendChild(text);
+        }
+      }
+    }
+  </script>
+  <script src="app.js"></script>
+
+  </body>
+
+
+  
+
+</html>
